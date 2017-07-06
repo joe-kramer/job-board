@@ -1,0 +1,9 @@
+<!--cities.vtl-->
+<h1>All Cities</h1>
+<ul>
+  #foreach ($city in $cities)
+    <li><a href="/cities/$city.getId()">$city.getName() - $city.getId()</a></li>
+  #end
+</ul>
+<a href="/cities/new">Add New City</a>
+<!--cities.vtl-->
