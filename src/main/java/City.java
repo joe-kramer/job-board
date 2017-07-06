@@ -11,6 +11,7 @@ public class City {
     mName = name;
     instances.add(this);
     mId = instances.size();
+    jobs = new ArrayList<Job>();
   }
 
   public String getName() {
@@ -35,5 +36,9 @@ public class City {
 
   public static List<Job> getJobs() {
     return jobs;
+  }
+
+  public static void addJob(Job newJob) {
+    jobs.add(newJob);
   }
 }

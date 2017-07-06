@@ -58,9 +58,11 @@ public class App {
     post("/cities/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/city.vtl");
+      City city = City.find(Integer.parseInt(request.queryParams("cityId")));
+      model.put("city", city);
       String jobName = request.queryParams("name");
       Job job = new Job(jobName);
-      model.put("jobs", Job.all());
+      city.addJob(job);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
