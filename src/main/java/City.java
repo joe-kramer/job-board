@@ -32,4 +32,8 @@ public class City {
       return null;
     }
   }
+
+  public static List<Job> getJobs() {
+    return jobs;
+  }
 }

@@ -39,7 +39,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/categories/:id", (request, response) -> {
+    get("/cities/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/city.vtl");
       City city = City.find(Integer.parseInt(request.params(":id")));
@@ -47,11 +47,21 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/cities/$city.getId()/jobs/new", (request, response) -> {
+    get("/cities/:id/jobs/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/job-form.vtl");
+      City city = City.find(Integer.parseInt(request.params(":id")));
+      model.put("city", city);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-    }
-
+    post("/cities/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/city.vtl");
+      String jobName = request.queryParams("name");
+      Job job = new Job(jobName);
+      model.put("jobs", Job.all());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
